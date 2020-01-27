@@ -3,12 +3,22 @@ package sample;
 public class Mesa {
     private Integer numeroMesa;
     private Integer numOcupantes;
+
+    public boolean isEstaLivre() {
+        return estaLivre;
+    }
+
+    public void setEstaLivre(boolean estaLivre) {
+        this.estaLivre = estaLivre;
+    }
+
     private boolean estaLivre = true;
     private Comanda comanda;
     private Integer capacidade;
 
-    public Mesa(Integer numero){
+    public Mesa(Integer numero, Integer capacidade){
         this.numeroMesa = numero;
+        this.capacidade = capacidade;
     }
 
     public void ocuparMesa(int numOcupantes) {

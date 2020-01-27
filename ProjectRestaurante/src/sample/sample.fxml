@@ -20,7 +20,7 @@
       </ScrollPane>
       <ScrollPane layoutX="228.0" layoutY="62.0" prefHeight="510.0" prefWidth="200.0">
          <content>
-            <ListView fx:id="listViewLivres" prefHeight="510.0" prefWidth="202.0" />
+            <ListView fx:id="listViewLivres" onMouseClicked="#reservarMesa" prefHeight="510.0" prefWidth="202.0" />
          </content>
       </ScrollPane>
       <ScrollPane layoutX="445.0" layoutY="62.0" prefHeight="510.0" prefWidth="200.0">
@@ -34,7 +34,7 @@
             <ComboBox fx:id="comboBoxGarçom" layoutX="78.0" layoutY="145.0" prefHeight="27.0" prefWidth="213.0" />
             <ComboBox fx:id="comboBoxPedido" layoutX="78.0" layoutY="87.0" prefHeight="27.0" prefWidth="213.0" />
             <Button fx:id="buttonAbrirMesa" layoutX="52.0" layoutY="203.0" mnemonicParsing="false" onAction="#abrirMesa" prefHeight="27.0" prefWidth="118.0" text="Abrir Mesa" />
-            <Button fx:id="buttonReservarMesa" layoutX="173.0" layoutY="203.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="118.0" text="Reservar Mesa" />
+            <Button fx:id="buttonReservarMesa" layoutX="173.0" layoutY="203.0" mnemonicParsing="false" onAction="#reservarMesa2" prefHeight="27.0" prefWidth="118.0" text="Reservar Mesa" />
             <Button fx:id="buttonDesocuparMesa" layoutX="112.0" layoutY="329.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="118.0" text="Desocupar Mesa" />
             <Label layoutX="24.0" layoutY="8.0" prefHeight="67.0" prefWidth="126.0" text="Mesa">
                <font>

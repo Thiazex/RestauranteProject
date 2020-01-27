@@ -8,6 +8,7 @@ public class Funcionario extends Pessoa{
 
     @Override
     public String toString(){
+
         return this.getNome().toString();
     }
 }

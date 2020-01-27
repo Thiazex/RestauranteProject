@@ -1,5 +1,6 @@
 package sample;
 
+import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -12,7 +13,9 @@ import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.rmi.server.ExportException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +39,9 @@ public class ControllerPrincipal {
     ObservableList<Funcionario> obsFuncionario;
 
     @FXML
-    private ComboBox<?> comboBoxPedido;
+    private ComboBox<Pedido> comboBoxPedido = new ComboBox<Pedido>();
+    private List<Pedido> pedidos = new ArrayList<>();
+    ObservableList<Pedido> obsPedido;
 
     @FXML
     private Button buttonAbrirMesa;
@@ -55,22 +60,26 @@ public class ControllerPrincipal {
 
     private List<Mesa> mesas = new ArrayList<>();
     private List<Mesa> mesasOcupadas = new ArrayList<>();
+    private List<Mesa> mesasReservadas = new ArrayList<>();
 
     private ObservableList<Mesa> obsMesas;
     private ObservableList<Mesa> obsMesasOcupadas;
+    private ObservableList<Mesa> obsMesasReservadas;
 
     public void carregandoMesas(){
-        Mesa mesa1 = new Mesa(1);
-        Mesa mesa2 = new Mesa(2);
-        Mesa mesa3 = new Mesa(3);
-        Mesa mesa4 = new Mesa(4);
-        Mesa mesa5 = new Mesa(10);
 
-        mesas.add(mesa1);
-        mesas.add(mesa2);
-        mesas.add(mesa3);
-        mesas.add(mesa4);
-        mesas.add(mesa5);
+            Mesa mesa1 = new Mesa(1, 4);
+            Mesa mesa2 = new Mesa(2, 4);
+            Mesa mesa3 = new Mesa(3,4);
+            Mesa mesa4 = new Mesa(4,4);
+            Mesa mesa5 = new Mesa(6,4);
+
+            mesas.add(mesa1);
+            mesas.add(mesa2);
+            mesas.add(mesa3);
+            mesas.add(mesa4);
+            mesas.add(mesa5);
+
 
         obsMesas = FXCollections.observableArrayList(mesas);
         obsMesasOcupadas = FXCollections.observableArrayList(mesasOcupadas);
@@ -79,13 +88,39 @@ public class ControllerPrincipal {
         listViewOcupadas.setItems(obsMesasOcupadas);
     }
 
+
     @FXML
     public void initialize(){
+
         carregandoMesas();
-        Funcionario func1 = new Funcionario("João",12, "003-000");
+
+        Funcionario func1 = new Funcionario("Thiago",18, "4002-8922");
+        Funcionario func2 = new Funcionario("Liryel", 33, "99558877");
+        Funcionario func3 = new Funcionario("Neto", 21, "99559877");
+        Funcionario func4 = new Funcionario("Jorge", 34, "99553877");
+        Funcionario func5 = new Funcionario("Maria", 60, "99557817");
+        Funcionario func6 = new Funcionario("Karol", 18, "98768877");
+        Funcionario func7 = new Funcionario("Toto", 19, "99928708");
 
         funcionarios.add(func1);
+        funcionarios.add(func2);
+        funcionarios.add(func3);
+        funcionarios.add(func4);
+        funcionarios.add(func5);
+        funcionarios.add(func6);
+        funcionarios.add(func7);
+
+        Pedido ped1 = new Pedido("Camarão");
+        Pedido ped2 = new Pedido("Cachorro Quente");
+        Pedido ped3 = new Pedido("Macarrão");
+
+        pedidos.add(ped1);
+        pedidos.add(ped2);
+        pedidos.add(ped3);
+
+        obsPedido = FXCollections.observableArrayList((pedidos));
         obsFuncionario = FXCollections.observableArrayList((funcionarios));
+        comboBoxPedido.setItems(obsPedido);
         comboBoxGarçom.setItems(obsFuncionario);
 
     }
@@ -101,5 +136,20 @@ public class ControllerPrincipal {
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
+
+    }
+
+
+
+    public void reservarMesa(javafx.scene.input.MouseEvent mouseEvent) {
+
+    }
+
+    public void reservarMesa2(javafx.event.ActionEvent actionEvent) throws IOException {
+        listViewLivres.getSelectionModel().getSelectedItem().ocuparMesa(1);
+        listViewReservado.getItems().add(listViewLivres.getSelectionModel().getSelectedItem());
+        listViewLivres.getItems().remove(listViewLivres.getSelectionModel().getSelectedItem());
+        listViewLivres.getSelectionModel().getSelectedItem().setEstaLivre(true);
+
     }
 }
