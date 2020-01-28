@@ -3,6 +3,10 @@ package sample;
 public class Mesa {
     private Integer numeroMesa;
     private Integer numOcupantes;
+    private boolean estaLivre = true;
+    private Comanda comanda;
+    private Integer capacidade;
+
 
     public boolean isEstaLivre() {
         return estaLivre;
@@ -12,9 +16,6 @@ public class Mesa {
         this.estaLivre = estaLivre;
     }
 
-    private boolean estaLivre = true;
-    private Comanda comanda;
-    private Integer capacidade;
 
     public Mesa(Integer numero, Integer capacidade){
         this.numeroMesa = numero;
@@ -41,8 +42,23 @@ public class Mesa {
         }
     }
 
+
+
     @Override
     public String toString(){
         return "Mesa "+this.numeroMesa.toString();
+    }
+
+    public void abrirMesa(Prato prato, Funcionario garcom) {
+        Pedido novo = new Pedido(prato, garcom);
+        this.comanda = new Comanda();
+        comanda.registrarPedido(novo);
+
+
+// TODO
+    }
+
+    public Comanda getComanda() {
+        return this.comanda;
     }
 }

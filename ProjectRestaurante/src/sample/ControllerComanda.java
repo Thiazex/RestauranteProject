@@ -1,5 +1,7 @@
 package sample;
 
+
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -7,26 +9,14 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.PropertyPermission;
+import java.io.IOException;
 
 public class ControllerComanda {
 
     @FXML
-    private TableView<?> tableViewComanda;
-
-    @FXML
-    private TableColumn tableColumnGarçom = new TableColumn<>("GarçomHERE");
-
-    @FXML
-    private TableColumn tableColumnPedido = new TableColumn<>("PedidoHERE");
-
-    @FXML
-    private TableColumn tableColumnValor = new TableColumn<>("ValorHERE");
+    private TableView<Pedido> tableViewComanda;
 
     @FXML
     private Button buttonLiberarMesa;
@@ -44,15 +34,36 @@ public class ControllerComanda {
     private TextField textFieldDesconto;
 
     @FXML
-    public void initialize(){
-        List pessoas = Arrays.asList(
-                new Pessoa("Jorge", 12, "200-333"),
-                new Pessoa("Caca", 22, "200-444")
-        );
-        tableColumnGarçom.setCellValueFactory(new PropertyValueFactory<>("nome"));
-        tableColumnPedido.setCellValueFactory(new PropertyValueFactory<>("contato"));
-        tableColumnValor.setCellValueFactory(new PropertyValueFactory<>("contato"));
-        tableViewComanda.setItems(FXCollections.observableArrayList(pessoas));
+    private TableColumn<?, ?> tableColumnGarçom;
 
+    @FXML
+    private TableColumn<?, ?> tableColumnPedido;
+
+    @FXML
+    private TableColumn<?, ?> tableColumnValor;
+
+    private Mesa mesa;
+
+    @FXML
+    public void initialize(){
+        tableColumnGarçom.setCellValueFactory(new PropertyValueFactory<>("nomeGarcom")); // TODO
+        tableColumnPedido.setCellValueFactory(new PropertyValueFactory<>("nomePrato")); //TODO
+        tableColumnValor.setCellValueFactory(new PropertyValueFactory<>("valor")); //TODO
+    }
+
+
+    public void liberarMesa(javafx.event.ActionEvent actionEvent) throws IOException{
+
+    }
+    public void finalizarPedido(javafx.event.ActionEvent actionEvent) throws IOException{
+
+    }
+    public void aplicarDesconto(javafx.event.ActionEvent actionEvent) throws IOException{
+
+    }
+
+    public void recebeMesa(Mesa mesa) {
+        this.mesa = mesa;
+        tableViewComanda.setItems(FXCollections.observableArrayList(mesa.getComanda().getPedidos()));
     }
 }

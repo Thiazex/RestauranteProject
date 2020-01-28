@@ -5,6 +5,14 @@ public class Prato {
     private String[] ingredientes;
     private Double valorPrato;
 
+
+
+public Prato(String nome, Double valorPrato){
+
+    this.nome = nome;
+    this.valorPrato = valorPrato;
+}
+
     public String getNome() {
         return nome;
     }

@@ -9,13 +9,6 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ControllerComanda">
    <children>
-      <TableView fx:id="tableViewComanda" layoutX="16.0" layoutY="14.0" prefHeight="226.0" prefWidth="568.0" style="-fx-background-color: FFFFFFF;" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="14.0">
-        <columns>
-          <TableColumn fx:id="tableColumnGarçom" prefWidth="146.0" sortType="DESCENDING" text="Garçom" />
-          <TableColumn fx:id="tableColumnPedido" prefWidth="275.0" text="Pedido" />
-            <TableColumn fx:id="tableColumnValor" prefWidth="146.0" text="Valor" />
-        </columns>
-      </TableView>
       <Button fx:id="buttonLiberarMesa" layoutX="131.0" layoutY="338.0" mnemonicParsing="false" text="Liberar Mesa" />
       <Button fx:id="buttonAplicarDesconto" layoutX="444.0" layoutY="338.0" mnemonicParsing="false" text="Aplicar Desconto" />
       <Button fx:id="buttonFinalizarPedido" layoutX="282.0" layoutY="338.0" mnemonicParsing="false" text="Finalizar Pedido" />
@@ -23,5 +16,12 @@
       <TextField fx:id="textFieldDesconto" layoutX="432.0" layoutY="296.0" />
       <Label layoutX="377.0" layoutY="259.0" prefHeight="18.0" prefWidth="36.0" text="Total" />
       <Label layoutX="364.0" layoutY="300.0" prefHeight="18.0" prefWidth="57.0" text="Desconto" />
+      <TableView fx:id="tableViewComanda" layoutX="15.0" layoutY="6.0" prefHeight="237.0" prefWidth="570.0">
+        <columns>
+          <TableColumn fx:id="tableColumnGarçom" prefWidth="109.0" text="Garçom" />
+          <TableColumn fx:id="tableColumnPedido" minWidth="0.0" prefWidth="328.0" text="Pedido" />
+            <TableColumn fx:id="tableColumnValor" prefWidth="132.0" text="Valor" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>

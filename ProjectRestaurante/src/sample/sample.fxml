@@ -20,7 +20,7 @@
       </ScrollPane>
       <ScrollPane layoutX="228.0" layoutY="62.0" prefHeight="510.0" prefWidth="200.0">
          <content>
-            <ListView fx:id="listViewLivres" onMouseClicked="#reservarMesa" prefHeight="510.0" prefWidth="202.0" />
+            <ListView fx:id="listViewLivres"  prefHeight="510.0" prefWidth="202.0" />
          </content>
       </ScrollPane>
       <ScrollPane layoutX="445.0" layoutY="62.0" prefHeight="510.0" prefWidth="200.0">

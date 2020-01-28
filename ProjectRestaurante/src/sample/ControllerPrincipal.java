@@ -31,7 +31,9 @@ public class ControllerPrincipal {
     private ListView<Mesa> listViewOcupadas;
 
     @FXML
-    private ComboBox<Mesa> comboBoxOcupadas;
+    private ComboBox<Mesa> comboBoxOcupadas = new ComboBox<>();
+  //  private List<Mesa> mesasOcupadas = new ArrayList<>();
+    //    ObservableList<Mesa> obsMesasOcupadas;
 
     @FXML
     private ComboBox<Funcionario> comboBoxGarçom = new ComboBox<Funcionario>();
@@ -39,9 +41,9 @@ public class ControllerPrincipal {
     ObservableList<Funcionario> obsFuncionario;
 
     @FXML
-    private ComboBox<Pedido> comboBoxPedido = new ComboBox<Pedido>();
-    private List<Pedido> pedidos = new ArrayList<>();
-    ObservableList<Pedido> obsPedido;
+    private ComboBox<Prato> comboBoxPedido = new ComboBox<Prato>();
+    private List<Prato> pratos = new ArrayList<>();
+    ObservableList<Prato> obsPedido;
 
     @FXML
     private Button buttonAbrirMesa;
@@ -51,6 +53,7 @@ public class ControllerPrincipal {
 
     @FXML
     private Button buttonDesocuparMesa;
+
 
     public ControllerPrincipal(){
         mesas = new ArrayList<>();
@@ -110,15 +113,15 @@ public class ControllerPrincipal {
         funcionarios.add(func6);
         funcionarios.add(func7);
 
-        Pedido ped1 = new Pedido("Camarão");
-        Pedido ped2 = new Pedido("Cachorro Quente");
-        Pedido ped3 = new Pedido("Macarrão");
+        Prato ped1 = new Prato("Camarão", 12.00);
+        Prato ped2 = new Prato("Cachorro Quente", 3.00);
+        Prato ped3 = new Prato("Macarrão", 8.00);
 
-        pedidos.add(ped1);
-        pedidos.add(ped2);
-        pedidos.add(ped3);
+        pratos.add(ped1);
+        pratos.add(ped2);
+        pratos.add(ped3);
 
-        obsPedido = FXCollections.observableArrayList((pedidos));
+        obsPedido = FXCollections.observableArrayList((pratos));
         obsFuncionario = FXCollections.observableArrayList((funcionarios));
         comboBoxPedido.setItems(obsPedido);
         comboBoxGarçom.setItems(obsFuncionario);
@@ -131,25 +134,35 @@ public class ControllerPrincipal {
         Stage stage1 = (Stage) buttonAbrirMesa.getScene().getWindow();
         stage1.close();
 
+        listViewLivres.getItems().add(listViewLivres.getSelectionModel().getSelectedItem());
+        listViewLivres.getItems().remove(listViewLivres.getSelectionModel().getSelectedItem());
+        listViewLivres.getSelectionModel().getSelectedItem().setEstaLivre(false);
+
         FXMLLoader load = new FXMLLoader(this.getClass().getResource("Comandas.fxml"));
         Parent root = load.load();
+        ControllerComanda control = load.getController();
+
+
+        Mesa mesa = listViewLivres.getSelectionModel().getSelectedItem();
+
+        mesa.abrirMesa(comboBoxPedido.getSelectionModel().getSelectedItem(), comboBoxGarçom.getSelectionModel().getSelectedItem());
+        control.recebeMesa(mesa);
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
 
+
+
     }
 
-
-
-    public void reservarMesa(javafx.scene.input.MouseEvent mouseEvent) {
-
-    }
 
     public void reservarMesa2(javafx.event.ActionEvent actionEvent) throws IOException {
-        listViewLivres.getSelectionModel().getSelectedItem().ocuparMesa(1);
+        listViewLivres.getSelectionModel().getSelectedItem().ocuparMesa(4);
         listViewReservado.getItems().add(listViewLivres.getSelectionModel().getSelectedItem());
         listViewLivres.getItems().remove(listViewLivres.getSelectionModel().getSelectedItem());
-        listViewLivres.getSelectionModel().getSelectedItem().setEstaLivre(true);
+        listViewLivres.getSelectionModel().getSelectedItem().setEstaLivre(false);
 
     }
+
+
 }
