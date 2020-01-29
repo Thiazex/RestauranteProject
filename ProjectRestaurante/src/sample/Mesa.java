@@ -6,6 +6,7 @@ public class Mesa {
     private boolean estaLivre = true;
     private Comanda comanda;
     private Integer capacidade;
+    private Prato prato;
 
 
     public boolean isEstaLivre() {
@@ -50,6 +51,7 @@ public class Mesa {
     }
 
     public void abrirMesa(Prato prato, Funcionario garcom) {
+        this.prato = prato;
         Pedido novo = new Pedido(prato, garcom);
         this.comanda = new Comanda();
         comanda.registrarPedido(novo);
@@ -60,5 +62,9 @@ public class Mesa {
 
     public Comanda getComanda() {
         return this.comanda;
+    }
+
+    public Prato getPrato(){
+        return this.prato;
     }
 }

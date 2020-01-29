@@ -32,7 +32,7 @@ public class ControllerPrincipal {
 
     @FXML
     private ComboBox<Mesa> comboBoxOcupadas = new ComboBox<>();
-  //  private List<Mesa> mesasOcupadas = new ArrayList<>();
+    //  private List<Mesa> mesasOcupadas = new ArrayList<>();
     //    ObservableList<Mesa> obsMesasOcupadas;
 
     @FXML
@@ -55,7 +55,7 @@ public class ControllerPrincipal {
     private Button buttonDesocuparMesa;
 
 
-    public ControllerPrincipal(){
+    public ControllerPrincipal() {
         mesas = new ArrayList<>();
 
 
@@ -69,19 +69,19 @@ public class ControllerPrincipal {
     private ObservableList<Mesa> obsMesasOcupadas;
     private ObservableList<Mesa> obsMesasReservadas;
 
-    public void carregandoMesas(){
+    public void carregandoMesas() {
 
-            Mesa mesa1 = new Mesa(1, 4);
-            Mesa mesa2 = new Mesa(2, 4);
-            Mesa mesa3 = new Mesa(3,4);
-            Mesa mesa4 = new Mesa(4,4);
-            Mesa mesa5 = new Mesa(6,4);
+        Mesa mesa1 = new Mesa(1, 4);
+        Mesa mesa2 = new Mesa(2, 4);
+        Mesa mesa3 = new Mesa(3, 4);
+        Mesa mesa4 = new Mesa(4, 4);
+        Mesa mesa5 = new Mesa(6, 4);
 
-            mesas.add(mesa1);
-            mesas.add(mesa2);
-            mesas.add(mesa3);
-            mesas.add(mesa4);
-            mesas.add(mesa5);
+        mesas.add(mesa1);
+        mesas.add(mesa2);
+        mesas.add(mesa3);
+        mesas.add(mesa4);
+        mesas.add(mesa5);
 
 
         obsMesas = FXCollections.observableArrayList(mesas);
@@ -93,11 +93,11 @@ public class ControllerPrincipal {
 
 
     @FXML
-    public void initialize(){
+    public void initialize() {
 
         carregandoMesas();
 
-        Funcionario func1 = new Funcionario("Thiago",18, "4002-8922");
+        Funcionario func1 = new Funcionario("Thiago", 18, "4002-8922");
         Funcionario func2 = new Funcionario("Liryel", 33, "99558877");
         Funcionario func3 = new Funcionario("Neto", 21, "99559877");
         Funcionario func4 = new Funcionario("Jorge", 34, "99553877");
@@ -129,7 +129,6 @@ public class ControllerPrincipal {
     }
 
 
-
     public void abrirMesa(javafx.event.ActionEvent actionEvent) throws IOException {
         Stage stage1 = (Stage) buttonAbrirMesa.getScene().getWindow();
         stage1.close();
@@ -152,7 +151,6 @@ public class ControllerPrincipal {
         stage.show();
 
 
-
     }
 
 
@@ -164,5 +162,7 @@ public class ControllerPrincipal {
 
     }
 
+  //  public void receberMesa(Mesa mesa){
+     //   listViewOcupadas.getItems().add(mesa);    }
 
 }

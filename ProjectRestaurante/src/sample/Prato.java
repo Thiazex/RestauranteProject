@@ -51,6 +51,10 @@ public Prato(String nome, Double valorPrato){
         return this.valorPrato;
     }
 
+    public String toString(){
+        return this.nome;
+    }
+
 
 
 }

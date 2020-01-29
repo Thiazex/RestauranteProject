@@ -23,9 +23,7 @@ public class Pedido {
     }
 
 
-    public String toString() {
-        return prato.getNome();
-    }
+
 
 
 
