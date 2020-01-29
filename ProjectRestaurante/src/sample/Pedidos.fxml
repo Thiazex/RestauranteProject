@@ -9,8 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #aaaaaa;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Pedidos">
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #aaaaaa;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ControllerPedidos">
    <children>
       <AnchorPane layoutX="28.0" layoutY="56.0" prefHeight="530.0" prefWidth="640.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="56.0">
          <children>
@@ -27,15 +26,15 @@
       <AnchorPane layoutX="697.0" layoutY="109.0" prefHeight="382.0" prefWidth="273.0" style="-fx-background-color: #FFFFFF;">
          <children>
             <ComboBox fx:id="comboBoxPedidoAtual" layoutX="97.0" layoutY="79.0" prefWidth="150.0" />
-            <ComboBox fx:id="comboBoxGarçom" layoutX="97.0" layoutY="163.0" prefWidth="150.0" />
-            <Button fx:id="buttonEliminar" layoutX="180.0" layoutY="113.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="67.0" text="Eliminar" />
-            <Button fx:id="buttonAdicionar" layoutX="98.0" layoutY="113.0" mnemonicParsing="false" text="Adicionar" />
+            <ComboBox fx:id="comboBoxGarçom" layoutX="97.0" layoutY="113.0" prefWidth="150.0" />
+            <Button fx:id="buttonEliminar" layoutX="152.0" layoutY="163.0" mnemonicParsing="false" onAction="#setButtonEliminar" prefHeight="25.0" prefWidth="106.0" text="Eliminar" />
+            <Button fx:id="buttonAdicionar" layoutX="25.0" layoutY="163.0" mnemonicParsing="false" onAction="#setButtonAdicionar" prefHeight="25.0" prefWidth="106.0" text="Adicionar" />
             <TextArea fx:id="textAreaComentarios" layoutX="14.0" layoutY="241.0" prefHeight="65.0" prefWidth="234.0" />
-            <Button fx:id="buttonEditarPedido" layoutX="15.0" layoutY="312.0" mnemonicParsing="false" text="Editar Pedido" />
-            <Button fx:id="buttonFecharMesa" layoutX="164.0" layoutY="312.0" mnemonicParsing="false" text="Fechar Mesa" />
-            <Button fx:id="buttonEnviarParaCozinha" layoutX="14.0" layoutY="349.0" mnemonicParsing="false" text="Enviar Para Cozinha" />
+            <Button fx:id="buttonEditarPedido" layoutX="15.0" layoutY="312.0" mnemonicParsing="false" onAction="#setButtonEditarPedido" text="Editar Pedido" />
+            <Button fx:id="buttonFecharMesa" layoutX="164.0" layoutY="312.0" mnemonicParsing="false" onAction="#setButtonFecharMesa" text="Fechar Mesa" />
+            <Button fx:id="buttonEnviarParaCozinha" layoutX="14.0" layoutY="349.0" mnemonicParsing="false" onAction="#setButtonEnviarParaCozinha" text="Enviar Para Cozinha" />
             <Label layoutX="16.0" layoutY="224.0" text="Comentarios" />
-            <Label layoutX="44.0" layoutY="167.0" text="Garçom" />
+            <Label layoutX="37.0" layoutY="117.0" text="Garçom" />
             <Label layoutX="24.0" layoutY="83.0" text="Pedido Atual" />
             <Label layoutX="16.0" layoutY="14.0" prefHeight="40.0" prefWidth="132.0" text="Pedido">
                <font>

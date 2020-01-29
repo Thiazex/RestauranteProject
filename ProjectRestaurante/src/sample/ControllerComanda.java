@@ -46,15 +46,25 @@ public class ControllerComanda {
     @FXML
     private TableColumn<?, ?> tableColumnValor;
 
-    private Mesa mesa;
+     Mesa mesa = new Mesa(0,7);
+
 
     @FXML
     public void initialize(){
-
+        ControllerPrincipal.addMudaTela(new ControllerPrincipal.ObsMudaTela() {
+            @Override
+            public void mudaTela(Object objetoQualquer) {
+                mesa = ((Mesa) objetoQualquer);
+                tableColumnGarçom.setCellValueFactory(new PropertyValueFactory<>("nomeGarçom")); // TODO
+                tableColumnPedido.setCellValueFactory(new PropertyValueFactory<>("nomePrato")); //TODO
+                tableColumnValor.setCellValueFactory(new PropertyValueFactory<>("valor")); //TODO
+                tableViewComanda.setItems(FXCollections.observableArrayList(mesa.getComanda().getPedidos()));
+            }
+        });
       //  textFieldTotal.setText(mesa.getPrato().getValor().toString());
-        tableColumnGarçom.setCellValueFactory(new PropertyValueFactory<>("nomeGarçom")); // TODO
-        tableColumnPedido.setCellValueFactory(new PropertyValueFactory<>("nomePrato")); //TODO
-        tableColumnValor.setCellValueFactory(new PropertyValueFactory<>("valor")); //TODO
+
+
+
     }
 
 
@@ -73,9 +83,13 @@ public class ControllerComanda {
 
     }
     public void aplicarDesconto(javafx.event.ActionEvent actionEvent) throws IOException{
-        Double d = Double.parseDouble(textFieldTotal.getText());
-        d*=0.1;
-        textFieldTotal.setText(d.toString());
+        if(textFieldDesconto.getText().contains("ABCDE")) {
+            Double d = Double.parseDouble(textFieldTotal.getText());
+            d *= 0.9;
+            textFieldTotal.setText(d.toString());
+        }else{
+            System.out.println("vrau");
+        }
     }
 
 

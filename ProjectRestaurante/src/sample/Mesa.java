@@ -1,5 +1,7 @@
 package sample;
 
+import javafx.collections.ObservableList;
+
 public class Mesa {
     private Integer numeroMesa;
     private Integer numOcupantes;
@@ -7,6 +9,14 @@ public class Mesa {
     private Comanda comanda;
     private Integer capacidade;
     private Prato prato;
+
+    public Integer getNumeroMesa() {
+        return numeroMesa;
+    }
+
+    public void setNumeroMesa(Integer numeroMesa) {
+        this.numeroMesa = numeroMesa;
+    }
 
 
     public boolean isEstaLivre() {

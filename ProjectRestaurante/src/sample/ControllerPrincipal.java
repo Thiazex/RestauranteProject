@@ -54,12 +54,9 @@ public class ControllerPrincipal {
     @FXML
     private Button buttonDesocuparMesa;
 
+    @FXML
+    private Button buttonPedido;
 
-    public ControllerPrincipal() {
-        mesas = new ArrayList<>();
-
-
-    }
 
     private List<Mesa> mesas = new ArrayList<>();
     private List<Mesa> mesasOcupadas = new ArrayList<>();
@@ -69,13 +66,37 @@ public class ControllerPrincipal {
     private ObservableList<Mesa> obsMesasOcupadas;
     private ObservableList<Mesa> obsMesasReservadas;
 
+    public ControllerPrincipal() {
+        mesas = new ArrayList<>();
+
+
+    }
+
+    private static ArrayList<ObsMudaTela> ouvintes = new ArrayList<ObsMudaTela>();
+
+    public static interface ObsMudaTela {
+        void mudaTela(Object objetoQualquer);
+    }
+
+    public static void addMudaTela(ObsMudaTela novoOuvinte) {
+        ouvintes.add(novoOuvinte);
+    }
+
+    public static void notificaOuvintes(Object dado) {
+        for (ObsMudaTela o : ouvintes) {
+            o.mudaTela(dado);
+        }
+    }
+
+
+
     public void carregandoMesas() {
 
         Mesa mesa1 = new Mesa(1, 4);
         Mesa mesa2 = new Mesa(2, 4);
         Mesa mesa3 = new Mesa(3, 4);
         Mesa mesa4 = new Mesa(4, 4);
-        Mesa mesa5 = new Mesa(6, 4);
+        Mesa mesa5 = new Mesa(5, 4);
 
         mesas.add(mesa1);
         mesas.add(mesa2);
@@ -91,42 +112,25 @@ public class ControllerPrincipal {
         listViewOcupadas.setItems(obsMesasOcupadas);
     }
 
+    Mesa mesa = new Mesa(1,1);
 
     @FXML
     public void initialize() {
-
         carregandoMesas();
+        ControllerPrincipal.addMudaTela(new ControllerPrincipal.ObsMudaTela() {
+            @Override
+            public void mudaTela(Object objetoQualquer) {
+                mesa = ((Mesa) objetoQualquer);
+                obsMesasOcupadas.add(mesa);
+                System.out.println(mesa.getPrato());
+                System.out.println(mesa.getComanda().getComentario());
+                System.out.println(mesa.getComanda().getFuncionario());
+            }
 
-        Funcionario func1 = new Funcionario("Thiago", 18, "4002-8922");
-        Funcionario func2 = new Funcionario("Liryel", 33, "99558877");
-        Funcionario func3 = new Funcionario("Neto", 21, "99559877");
-        Funcionario func4 = new Funcionario("Jorge", 34, "99553877");
-        Funcionario func5 = new Funcionario("Maria", 60, "99557817");
-        Funcionario func6 = new Funcionario("Karol", 18, "98768877");
-        Funcionario func7 = new Funcionario("Toto", 19, "99928708");
-
-        funcionarios.add(func1);
-        funcionarios.add(func2);
-        funcionarios.add(func3);
-        funcionarios.add(func4);
-        funcionarios.add(func5);
-        funcionarios.add(func6);
-        funcionarios.add(func7);
-
-        Prato ped1 = new Prato("Camarão", 12.00);
-        Prato ped2 = new Prato("Cachorro Quente", 3.00);
-        Prato ped3 = new Prato("Macarrão", 8.00);
-
-        pratos.add(ped1);
-        pratos.add(ped2);
-        pratos.add(ped3);
-
-        obsPedido = FXCollections.observableArrayList((pratos));
-        obsFuncionario = FXCollections.observableArrayList((funcionarios));
-        comboBoxPedido.setItems(obsPedido);
-        comboBoxGarçom.setItems(obsFuncionario);
-
+        });
     }
+
+
 
 
     public void abrirMesa(javafx.event.ActionEvent actionEvent) throws IOException {
@@ -139,27 +143,41 @@ public class ControllerPrincipal {
 
         FXMLLoader load = new FXMLLoader(this.getClass().getResource("Comandas.fxml"));
         Parent root = load.load();
-        ControllerComanda control = load.getController();
+       // ControllerComanda control = load.getController();
 
 
-        Mesa mesa = listViewLivres.getSelectionModel().getSelectedItem();
+       // Mesa mesa = listViewLivres.getSelectionModel().getSelectedItem();
 
-        mesa.abrirMesa(comboBoxPedido.getSelectionModel().getSelectedItem(), comboBoxGarçom.getSelectionModel().getSelectedItem());
-        control.recebeMesa(mesa);
+       // mesa.abrirMesa(comboBoxPedido.getSelectionModel().getSelectedItem(), comboBoxGarçom.getSelectionModel().getSelectedItem());
+        //control.recebeMesa(mesa);
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
+        notificaOuvintes(listViewReservado.getSelectionModel().getSelectedItem());
         stage.show();
 
 
     }
 
 
-    public void reservarMesa2(javafx.event.ActionEvent actionEvent) throws IOException {
+    public void reservarMesa2(javafx.event.ActionEvent actionEvent) throws Exception {
         listViewLivres.getSelectionModel().getSelectedItem().ocuparMesa(4);
         listViewReservado.getItems().add(listViewLivres.getSelectionModel().getSelectedItem());
         listViewLivres.getItems().remove(listViewLivres.getSelectionModel().getSelectedItem());
         listViewLivres.getSelectionModel().getSelectedItem().setEstaLivre(false);
 
+    }
+
+    public void abrirPedido(javafx.event.ActionEvent actionEvent) throws Exception{
+        Stage stage1 = (Stage) buttonPedido.getScene().getWindow();
+        stage1.close();
+        FXMLLoader load = new FXMLLoader(this.getClass().getResource("Pedidos.fxml"));
+        Parent root = load.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        Mesa m = listViewReservado.getSelectionModel().getSelectedItem();
+        notificaOuvintes(m);
+
+        stage.show();
     }
 
   //  public void receberMesa(Mesa mesa){
